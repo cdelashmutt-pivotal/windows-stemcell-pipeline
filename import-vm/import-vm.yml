@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: vmware/powerclicore }
+
+inputs:
+- name: windows-stemcell-pipeline
+- name: base-vm
+
+# outputs:
+
+params:
+  VCENTER_HOST:
+  VCENTER_USER:
+  VCENTER_PASSWORD:
+
+run:
+  path: powershell
+  args: 
+  - -Command 
+  - windows-stemcell-pipeline/import-vm/import-vm.ps1
