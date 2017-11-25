@@ -1,0 +1,22 @@
+resources:
+  - name: windows-stemcell-pipeline
+    type: git
+    source:
+      uri: https://github.com/cdelashmutt-pivotal/windows-stemcell-pipeline
+      branch: master
+  - name: base-vm
+    type: s3
+    source:
+      bucket: vmx-with-windows-update
+      regexp: windows-stem-(.*).ova
+      access_key_id: ((s3_access_key))
+      secret_access_key: ((s3_secret_key))
+      endpoint: ((s3_endpoint_uri))
+
+jobs:
+  - name: import-vm
+    plan:
+      - get: windows-stemcell-pipeline
+      - get: base-vm
+      - task: import-vm
+        file: import-vm/import-vm.yml
