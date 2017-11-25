@@ -9,4 +9,4 @@ $firstHost = Get-VMHost -Location $cluster | select -first 1
 $version = cat base-vm/version
 $ova = dir base-vm/*.ova | %{$_.Name}
 
-Import-vApp -Source $ova -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version"
+Import-vApp -Source "base-vm/$ova" -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version"
