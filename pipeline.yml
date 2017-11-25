@@ -19,4 +19,8 @@ jobs:
       - get: windows-stemcell-pipeline
       - get: base-vm
       - task: import-vm
-        file: import-vm/import-vm.yml
+        file: windows-stemcell-pipeline/import-vm/import-vm.yml
+        params:
+          VCENTER_HOST: ((vcenter_host))
+          VCENTER_USER: ((vcenter_user))
+          VCENTER_PASSWORD: ((vcenter_password))
