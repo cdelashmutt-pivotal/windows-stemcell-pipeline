@@ -1,0 +1,26 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: 
+    repository: vmware/powerclicore
+    tag: ubuntu14.04
+
+inputs:
+- name: windows-stemcell-pipeline
+- name: base-vm
+
+outputs:
+- name: stemcell
+
+params:
+  VCENTER_HOST:
+  VCENTER_USER:
+  VCENTER_PASSWORD:
+
+run:
+  path: powershell
+  args: 
+  - -Command 
+  - windows-stemcell-pipeline/export-vm/export-vm.ps1

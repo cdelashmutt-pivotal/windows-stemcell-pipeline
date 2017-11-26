@@ -33,11 +33,14 @@ jobs:
           VCENTER_PASSWORD: ((vcenter_password))
   - name: export-vm
     plan:
-      - put: stemcell
+      - get: windows-stemcell-pipeline
+      - get: base-vm
+        passed: [import-vm]
       - task: export-vm
         file: windows-stemcell-pipeline/export-vm/export-vm.yml
         params:
           VCENTER_HOST: ((vcenter_host))
           VCENTER_USER: ((vcenter_user))
           VCENTER_PASSWORD: ((vcenter_password))
+      - put: stemcell
         
