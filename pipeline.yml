@@ -43,4 +43,5 @@ jobs:
           VCENTER_USER: ((vcenter_user))
           VCENTER_PASSWORD: ((vcenter_password))
       - put: stemcell
-        
+        params:
+          file: stemcell/*.ova  
