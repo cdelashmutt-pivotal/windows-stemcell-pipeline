@@ -15,7 +15,6 @@ try
 }
 catch
 {
-	Write-Error "Exception Message: $_.Exception.Message"
-	Write-Error "Failed Item: $_.Exception.ItemName"
+	Write-Error $_
 	exit 1
 }
