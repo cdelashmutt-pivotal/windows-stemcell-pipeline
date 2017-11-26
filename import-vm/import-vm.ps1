@@ -11,7 +11,7 @@ try
 	$version = cat base-vm/version
 	$ova = dir base-vm/*$version.ova | %{$_.Name}
 
-	echo Import-vApp -Source "base-vm/$ova" -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version"
+	Import-vApp -Source "base-vm/$ova" -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version"
 }
 catch
 {
