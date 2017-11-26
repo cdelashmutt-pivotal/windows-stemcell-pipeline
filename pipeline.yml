@@ -12,6 +12,13 @@ resources:
       access_key_id: ((s3_access_key))
       secret_access_key: ((s3_secret_key))
       endpoint: ((s3_endpoint_uri))
+  - name: stemcell
+    type: s3
+    source:
+      bucket: stemcells
+      access_key_id: ((s3_access_key))
+      secret_access_key: ((s3_secret_key))
+      endpoint: ((s3_endpoint_uri))
 
 jobs:
   - name: import-vm
@@ -24,3 +31,13 @@ jobs:
           VCENTER_HOST: ((vcenter_host))
           VCENTER_USER: ((vcenter_user))
           VCENTER_PASSWORD: ((vcenter_password))
+  - name: export-vm
+    plan:
+      - put: stemcell
+      - task: export-vm
+        file: windows-stemcell-pipeline/export-vm/export-vm.yml
+        params:
+          VCENTER_HOST: ((vcenter_host))
+          VCENTER_USER: ((vcenter_user))
+          VCENTER_PASSWORD: ((vcenter_password))
+        
