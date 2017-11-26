@@ -1,5 +1,6 @@
 try
 {
+	$ErrorActionPreference = Stop
 	Get-Module -ListAvailable PowerCLI* | Import-Module
 
 	Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -confirm:$false -DisplayDeprecationWarnings:$false
