@@ -1,6 +1,5 @@
 try
 {
-	$ErrorActionPreference = Stop
 	Get-Module -ListAvailable PowerCLI* | Import-Module
 
 	Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -confirm:$false -DisplayDeprecationWarnings:$false
@@ -12,7 +11,7 @@ try
 	$version = cat base-vm/version
 	$ova = dir base-vm/*$version.ova | %{$_.Name}
 
-	Import-vApp -Source "base-vm/$ova" -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version"
+	Import-vApp -Source "base-vm/$ova" -VMHost $firstHost -Location $cluster -Name "windows-stemcell-$version" -ErrorAction Stop
 }
 catch
 {
